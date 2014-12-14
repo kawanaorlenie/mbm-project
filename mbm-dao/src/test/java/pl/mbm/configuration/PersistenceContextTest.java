@@ -25,7 +25,7 @@ import com.jolbox.bonecp.BoneCPDataSource;
 @EnableJpaRepositories(basePackageClasses = { UserDao.class })
 public class PersistenceContextTest {
 
-	private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
+	private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "test.hibernate.dialect";
 	private static final String PROPERTY_NAME_HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
 	private static final String PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
 	private static final String PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY = "hibernate.ejb.naming_strategy";
