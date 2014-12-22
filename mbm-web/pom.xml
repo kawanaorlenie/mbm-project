@@ -9,10 +9,20 @@
 	<artifactId>mbm-web</artifactId>
 	<packaging>war</packaging>
 
+	<properties>
+		<jstl.version>1.2</jstl.version>
+		<apache.tiles.version>3.0.5</apache.tiles.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>pl.mbm</groupId>
 			<artifactId>mbm-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>pl.mbm</groupId>
+			<artifactId>mbm-security</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<!-- Spring MVC -->
@@ -26,6 +36,13 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<!-- jstl -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+		<!-- -->
 		<dependency>
 			<groupId>com.jayway.jsonpath</groupId>
 			<artifactId>json-path</artifactId>
@@ -38,10 +55,10 @@
 			<version>1.3</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- servlet api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -58,6 +75,18 @@
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.2.2</version>
+		</dependency>
+				<!-- Tiles -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-core</artifactId>
+			<version>${apache.tiles.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>${apache.tiles.version}</version>
 		</dependency>
 
 	</dependencies>
