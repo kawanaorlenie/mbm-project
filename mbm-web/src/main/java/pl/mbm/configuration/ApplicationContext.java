@@ -11,7 +11,8 @@ import pl.mbm.validator.RegistrationValidator;
 @Configuration
 @ComponentScan(basePackageClasses = { UserServiceImpl.class,
 		RegistrationValidator.class })
-@Import({ ConversionServiceFactoryBeanContext.class, PersistenceContext.class })
+@Import({ ConversionServiceFactoryBeanContext.class, PersistenceContext.class,
+		WebAppContext.class })
 public class ApplicationContext {
 
 }

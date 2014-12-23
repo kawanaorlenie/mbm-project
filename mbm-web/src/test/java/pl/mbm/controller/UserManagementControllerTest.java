@@ -16,9 +16,7 @@ import java.util.Arrays;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -28,31 +26,30 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import pl.mbm.configuration.TestUserManagementControllerConfig;
 import pl.mbm.configuration.WebAppContext;
 import pl.mbm.model.dto.UserJTable;
 import pl.mbm.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { WebAppContext.class })
+@ContextConfiguration(classes = { TestUserManagementControllerConfig.class,
+		WebAppContext.class })
 @WebAppConfiguration
 public class UserManagementControllerTest {
 
 	private MockMvc mockMvc;
 
-	@Mock
+	@Autowired
 	private UserService userServiceMock;
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 
-	@InjectMocks
-	private UserManagementController userManagementController;
-
 	@Before
 	public void setUp() {
-		MockitoAnnotations.initMocks(this);
+		Mockito.reset(userServiceMock);
 
-		mockMvc = MockMvcBuilders.standaloneSetup(userManagementController)
+		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
 				.build();
 	}
 

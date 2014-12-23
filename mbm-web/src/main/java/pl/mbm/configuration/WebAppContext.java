@@ -17,7 +17,7 @@ import pl.mbm.security.configuration.SecurityConfig;
 
 @Configuration
 @EnableWebMvc
-@Import({ ApplicationContext.class, SecurityConfig.class })
+@Import({ SecurityConfig.class })
 @ComponentScan(basePackageClasses = { UserManagementController.class })
 public class WebAppContext extends WebMvcConfigurerAdapter {
 
@@ -26,17 +26,6 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
 			DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
-
-	// @Bean
-	// public InternalResourceViewResolver viewResolver() {
-	// InternalResourceViewResolver viewResolver = new
-	// InternalResourceViewResolver();
-	// viewResolver.setViewClass(JstlView.class);
-	// viewResolver.setPrefix("/WEB-INF/views/");
-	// // TODO : dodac tiles
-	// viewResolver.setSuffix(".jsp");
-	// return viewResolver;
-	// }
 
 	@Bean
 	public UrlBasedViewResolver viewResolver() {
