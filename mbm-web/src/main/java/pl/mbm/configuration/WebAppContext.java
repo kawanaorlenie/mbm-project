@@ -3,7 +3,6 @@ package pl.mbm.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -13,11 +12,9 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 
 import pl.mbm.controller.UserManagementController;
-import pl.mbm.security.configuration.SecurityConfig;
 
 @Configuration
 @EnableWebMvc
-@Import({ SecurityConfig.class })
 @ComponentScan(basePackageClasses = { UserManagementController.class })
 public class WebAppContext extends WebMvcConfigurerAdapter {
 
