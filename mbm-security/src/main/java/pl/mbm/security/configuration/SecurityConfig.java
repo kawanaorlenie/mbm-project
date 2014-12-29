@@ -30,9 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers("/resources/**", "/signup", "/about").permitAll()
-				.antMatchers("/admin/**").hasRole("ADMIN")
+		http.authorizeRequests().antMatchers("/resources/**", "/signup")
+				.permitAll().antMatchers("/admin/**").hasRole("ADMIN")
 				.antMatchers("/login**").anonymous()
 				.antMatchers("/user/register").hasRole("ADMIN")
 				// all requests require authentication
@@ -43,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				// redirect to "/user/list" when unauthorized
-				.and().exceptionHandling().accessDeniedPage("/user/list");
+				.and().exceptionHandling().accessDeniedPage("/");
 	}
 
 	@Autowired
