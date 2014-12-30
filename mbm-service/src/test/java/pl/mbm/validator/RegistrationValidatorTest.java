@@ -1,14 +1,13 @@
 package pl.mbm.validator;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import pl.mbm.validator.RegistrationValidator;
-
 public class RegistrationValidatorTest {
 
-	private RegistrationValidator validator = new RegistrationValidator();
+	private RegistrationValidator validator = new RegistrationValidatorImpl();
 
 	@Test
 	public void nameFormatCorrectTest() {

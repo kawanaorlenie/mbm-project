@@ -2,18 +2,18 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <c:url value="/login" var="loginUrl"/>
 <h3>
-   <spring:message code="login.header" text="default text" />
+   <spring:message code="login.header" text="Log In" />
 </h3>
 <p>
-   <spring:message code="login.mainText" text="default text" />
+   <spring:message code="login.mainText" text="Log in to find an event" />
 </p>
    <c:if test="${param.error != null}">        
-        <p>
-            Invalid username and password.
+        <p class="alert alert-danger">
+            Invalid username or password.
         </p>
     </c:if>
     <c:if test="${param.logout != null}">       
-        <p>
+        <p class="alert alert-info">
             You have been logged out.
         </p>
     </c:if>

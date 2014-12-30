@@ -18,14 +18,8 @@
       <jsp:include page="tab/passwordRecoveryTab.jsp" />
    </div>
 </div>
-<c:if test="${not empty signUpSuccess}">
-   <script>
-				$(document).ready(function() {
-					$("#registrationSuccessDialog").dialog();
-				});
-			</script>
+
    <jsp:include page="dialog/registrationSuccessDialog.jsp"></jsp:include>
-</c:if>
 <c:if test="${not empty activationSuccess}">
    <c:if test="${activationSuccess=='true'}">
       <script>
