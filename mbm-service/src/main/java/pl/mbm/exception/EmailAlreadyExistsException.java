@@ -1,4 +1,4 @@
-package pl.mbm.ecxeption;
+package pl.mbm.exception;
 
 public class EmailAlreadyExistsException extends ValidationException {
 

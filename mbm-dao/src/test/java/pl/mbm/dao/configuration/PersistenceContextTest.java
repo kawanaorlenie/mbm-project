@@ -1,4 +1,4 @@
-package pl.mbm.configuration;
+package pl.mbm.dao.configuration;
 
 import java.util.Properties;
 

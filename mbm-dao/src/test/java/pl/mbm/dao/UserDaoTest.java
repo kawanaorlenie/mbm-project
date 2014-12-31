@@ -19,7 +19,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.mbm.builder.UserBuilder;
-import pl.mbm.configuration.PersistenceContextTest;
+import pl.mbm.dao.configuration.PersistenceContextTest;
 import pl.mbm.model.entity.User;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;

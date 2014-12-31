@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.mbm.dao.UserDao;
-import pl.mbm.ecxeption.EmailAlreadyExistsException;
-import pl.mbm.ecxeption.EmailIncorrectFormatException;
-import pl.mbm.ecxeption.NameAlreadyExistsException;
-import pl.mbm.ecxeption.NameIcorrectFormatException;
-import pl.mbm.ecxeption.PasswordsMismatchException;
+import pl.mbm.exception.EmailAlreadyExistsException;
+import pl.mbm.exception.EmailIncorrectFormatException;
+import pl.mbm.exception.NameAlreadyExistsException;
+import pl.mbm.exception.NameIcorrectFormatException;
+import pl.mbm.exception.PasswordsMismatchException;
 import pl.mbm.model.dto.UserRegistrationForm;
 
 @Service
@@ -17,7 +17,7 @@ public class RegistrationValidatorImpl implements
 		Validator<UserRegistrationForm>, RegistrationValidator {
 
 	private static final String REGEX_NAME = "^[a-z]{1}[a-z0-9._]{4,18}[a-z0-9]{1}$";
-	private static final String REGEX_EMAIL = "^[a-z0-9]*@[a-z]*.[a-z]*";
+	private static final String REGEX_EMAIL = "^[a-z0-9._-]*@[a-z]*.[a-z]*";
 	private static final String REGEX_PASSWORD = ".{8,20}";
 
 	@Autowired

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import pl.mbm.ecxeption.ValidationException;
+import pl.mbm.exception.ValidationException;
 import pl.mbm.model.dto.UserJTable;
 import pl.mbm.model.dto.UserRegistrationForm;
 import pl.mbm.response.CorrectResponse;

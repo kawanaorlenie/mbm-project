@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Import;
 
 import pl.mbm.dao.RoleDao;
 import pl.mbm.dao.UserDao;
+import pl.mbm.service.configuration.ConversionServiceFactoryBeanContext;
 
 @Configuration
 @Import(ConversionServiceFactoryBeanContext.class)
