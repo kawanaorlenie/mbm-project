@@ -1,7 +1,7 @@
 package pl.mbm.dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,8 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import pl.mbm.dao.configuration.PersistenceContextTest;
-import pl.mbm.model.entity.Role;
+import pl.mbm.dao.util.TestUtils;
+import pl.mbm.model.entity.ActivationCode;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -25,21 +26,23 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 		DirtiesContextTestExecutionListener.class,
 		TransactionalTestExecutionListener.class,
 		DbUnitTestExecutionListener.class })
-@DatabaseSetup(value = "UserData.xml")
-public class RoleDaoTest {
+@DatabaseSetup("UserData.xml")
+public class ActivationCodeDaoTest {
 
 	@Autowired
-	private RoleDao roleDao;
+	private ActivationCodeDao activationCodeDao;
 
 	@Test
-	public void findOneByNameTest() {
-		Role role = roleDao.findOneByName("ROLE_USER");
-		assertEquals("ROLE_USER", role.getName());
+	public void autowireTest() {
+		assertNotNull(activationCodeDao);
 	}
 
 	@Test
-	public void findOneByNameTest_ShouldReturnNull() {
-		Role role = roleDao.findOneByName("ROLE_NIKT");
-		assertNull(role);
+	public void save_ShouldAddEntityToDatabase() {
+		ActivationCode activationCode = activationCodeDao.save(TestUtils
+				.getActivationCode());
+		assertNotNull(activationCode);
+		assertEquals(TestUtils.USER_NAME, activationCode.getUser().getName());
 	}
+
 }

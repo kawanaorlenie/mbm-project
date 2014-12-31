@@ -8,11 +8,13 @@ import pl.mbm.dao.configuration.PersistenceContext;
 import pl.mbm.listener.DatabaseFillerOnStartup;
 import pl.mbm.security.configuration.SecurityConfig;
 import pl.mbm.service.impl.UserServiceImpl;
+import pl.mbm.service.util.UUIDGenerator;
 import pl.mbm.validator.RegistrationValidator;
 
 @Configuration
 @ComponentScan(basePackageClasses = { UserServiceImpl.class,
-		RegistrationValidator.class, DatabaseFillerOnStartup.class })
+		RegistrationValidator.class, DatabaseFillerOnStartup.class,
+		UUIDGenerator.class })
 @Import({ ConversionServiceFactoryBeanContext.class, PersistenceContext.class,
 		WebAppContext.class, SecurityConfig.class })
 public class ApplicationContext {

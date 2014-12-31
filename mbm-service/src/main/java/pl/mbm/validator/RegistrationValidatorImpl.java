@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.mbm.dao.UserDao;
-import pl.mbm.ecxeption.EmailAlreadyExistsException;
-import pl.mbm.ecxeption.EmailIncorrectFormatException;
-import pl.mbm.ecxeption.NameAlreadyExistsException;
-import pl.mbm.ecxeption.NameIcorrectFormatException;
-import pl.mbm.ecxeption.PasswordsMismatchException;
+import pl.mbm.exception.EmailAlreadyExistsException;
+import pl.mbm.exception.EmailIncorrectFormatException;
+import pl.mbm.exception.NameAlreadyExistsException;
+import pl.mbm.exception.NameIcorrectFormatException;
+import pl.mbm.exception.PasswordsMismatchException;
 import pl.mbm.model.dto.UserRegistrationForm;
 
 @Service
