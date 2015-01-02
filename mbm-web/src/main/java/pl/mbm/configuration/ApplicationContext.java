@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Import;
 import pl.mbm.dao.configuration.PersistenceContext;
 import pl.mbm.listener.DatabaseFillerOnStartup;
 import pl.mbm.security.configuration.SecurityConfig;
+import pl.mbm.service.configuration.ConversionServiceFactoryBeanContext;
 import pl.mbm.service.configuration.MailBeans;
 import pl.mbm.service.impl.UserServiceImpl;
 import pl.mbm.service.util.UUIDGenerator;

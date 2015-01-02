@@ -4,6 +4,7 @@ import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import pl.mbm.dao.ActivationCodeDao;
 import pl.mbm.dao.UserDao;
@@ -49,6 +50,11 @@ public class UserServiceTestContext {
 	@Bean
 	public UUIDGenerator uuidGeneratorMock() {
 		return Mockito.mock(UUIDGenerator.class);
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return Mockito.mock(PasswordEncoder.class);
 	}
 
 }

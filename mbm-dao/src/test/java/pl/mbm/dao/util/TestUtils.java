@@ -18,9 +18,11 @@ public class TestUtils {
 	public static final String USER_EMAIL = "user00@mbm.pl";
 	public static final String USER_NAME = "user00";
 	public static final boolean USER_ENABLED = false;
-	public static final String USER_PASSWORD = "asdfasdf";
+	public static final String USER_PASSWORD = "password";
 	public static final Role USER_ROLE_TEST = new Role("ROLE_TEST");
 	public static final Long USER_ID = 1L;
+	// TODO na razie nie uzywam zakowodwanego hasla
+	public static final String USER_ENCODED_PASSWORD = null;
 
 	// nie wiem czy zmieniac wszystkie metody, ktore mozna na stale?
 	public static final User USER = new UserBuilder().email(USER_EMAIL)

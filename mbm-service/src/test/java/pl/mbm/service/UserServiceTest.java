@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -48,6 +49,9 @@ public class UserServiceTest {
 
 	@Autowired
 	private UUIDGenerator uuidGeneratorMock;
+
+	@Autowired
+	private PasswordEncoder passwordEncoderMock;
 
 	@Before
 	public void setUp() {
@@ -92,6 +96,7 @@ public class UserServiceTest {
 			.sendActivationMail(TestUtils.getActivationCode());
 		Mockito.when(uuidGeneratorMock.generate())
 			.thenReturn(TestUtils.CODE);
+		Mockito.when(passwordEncoderMock.encode(TestUtils.USER_PASSWORD)).thenReturn(TestUtils.USER_ENCODED_PASSWORD);
 
 		UserJTable userJTable = userService.registerUser(userRegistrationForm);
 		assertEquals(TestUtils.USER_NAME, userJTable.getName());
@@ -102,6 +107,7 @@ public class UserServiceTest {
 		verify(activationCodeDaoMock, times(1)).save(TestUtils.getActivationCode());
 		verify(mailServiceMock, times(1)).sendActivationMail(TestUtils.getActivationCode());
 		verify(uuidGeneratorMock,times(1)).generate();
+		verify(passwordEncoderMock,times(1)).encode(TestUtils.USER_PASSWORD);
 	}
 // @formatter:on
 	@Test

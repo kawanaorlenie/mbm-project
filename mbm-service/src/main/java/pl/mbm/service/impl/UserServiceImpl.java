@@ -6,6 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +37,8 @@ public class UserServiceImpl implements UserService {
 	private ActivationCodeDao activationCodeDao;
 	@Autowired
 	private UUIDGenerator uuidGenerator;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	@Transactional
@@ -46,6 +49,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserJTable registerUser(UserRegistrationForm userRegistrationForm) {
 		registrationValidator.validate(userRegistrationForm);
+		userRegistrationForm.setPassword(passwordEncoder
+				.encode(userRegistrationForm.getPassword()));
 		User user = conversionService.convert(userRegistrationForm, User.class);
 		ActivationCode savedActivationCode = saveUserAndActivationCode(user,
 				uuidGenerator.generate());
