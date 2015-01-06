@@ -3,20 +3,14 @@ package pl.mbm.configuration;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.ConversionService;
 
 import pl.mbm.dao.UserDao;
 import pl.mbm.service.ActivationService;
 import pl.mbm.service.impl.ActivationServiceImpl;
-import pl.mbm.service.validator.ActivationValidator;
 
 @Configuration
 public class ActivationServiceTestContext {
-
-	@Bean
-	public ActivationValidator activationValidatorMock() {
-		return Mockito.mock(ActivationValidator.class, Mockito.withSettings()
-				.verboseLogging());
-	}
 
 	@Bean
 	public UserDao userDaoMock() {
@@ -25,7 +19,13 @@ public class ActivationServiceTestContext {
 	}
 
 	@Bean
-	public ActivationService activationService() {
+	public ConversionService conversionServiceMock() {
+		return Mockito.mock(ConversionService.class, Mockito.withSettings()
+				.verboseLogging());
+	}
+
+	@Bean
+	public ActivationService activationServiceMock() {
 		return new ActivationServiceImpl();
 	}
 }

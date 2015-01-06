@@ -7,13 +7,13 @@ import pl.mbm.builder.UserJTableBuilder;
 import pl.mbm.builder.UserRegistrationFormBuilder;
 import pl.mbm.model.dto.UserJTable;
 import pl.mbm.model.dto.UserRegistrationForm;
-import pl.mbm.model.entity.ActivationCode;
 import pl.mbm.model.entity.Role;
 import pl.mbm.model.entity.User;
 
 public class TestUtils {
 
-	public static final String CODE = UUID.randomUUID().toString();
+	public static final String USER_ACTIVATION_CODE = UUID.randomUUID()
+			.toString();
 
 	public static final String USER_EMAIL = "user00@mbm.pl";
 	public static final String USER_NAME = "user00";
@@ -27,14 +27,7 @@ public class TestUtils {
 	// nie wiem czy zmieniac wszystkie metody, ktore mozna na stale?
 	public static final User USER = new UserBuilder().email(USER_EMAIL)
 			.name(USER_NAME).enabled(USER_ENABLED).password(USER_PASSWORD)
-			.role(USER_ROLE_TEST).build();
-
-	public static ActivationCode getActivationCode() {
-		ActivationCode activationCode = new ActivationCode();
-		activationCode.setCode(CODE);
-		activationCode.setUser(USER);
-		return activationCode;
-	}
+			.role(USER_ROLE_TEST).activationCode(USER_ACTIVATION_CODE).build();
 
 	public static UserRegistrationForm getUserRegistrationForm() {
 		return new UserRegistrationFormBuilder().name(USER_NAME)
@@ -51,13 +44,13 @@ public class TestUtils {
 	public static User getUserWithId() {
 		return new UserBuilder().email(USER_EMAIL).name(USER_NAME)
 				.enabled(USER_ENABLED).password(USER_PASSWORD)
-				.role(USER_ROLE_TEST).id(USER_ID).build();
+				.role(USER_ROLE_TEST).activationCode(USER_ACTIVATION_CODE)
+				.id(USER_ID).build();
 	}
 
-	public static ActivationCode getActivationCodeWithId() {
-		ActivationCode activationCode = new ActivationCode();
-		activationCode.setCode(CODE);
-		activationCode.setUser(getUserWithId());
-		return activationCode;
+	public static User getActivatedUserWithId() {
+		return new UserBuilder().email(USER_EMAIL).name(USER_NAME)
+				.enabled(true).password(USER_PASSWORD).role(USER_ROLE_TEST)
+				.activationCode(USER_ACTIVATION_CODE).id(USER_ID).build();
 	}
 }

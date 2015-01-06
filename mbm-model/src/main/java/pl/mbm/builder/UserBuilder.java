@@ -54,6 +54,11 @@ public class UserBuilder {
 		return this;
 	}
 
+	public UserBuilder activationCode(String activationCode) {
+		user.setActivationCode(activationCode);
+		return this;
+	}
+
 	public User build() {
 		return user;
 	}

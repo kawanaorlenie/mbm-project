@@ -12,7 +12,7 @@ public class MvcWebApplicationInitializer extends
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] { WebAppContext.class };
+		return null;
 	}
 
 	@Override

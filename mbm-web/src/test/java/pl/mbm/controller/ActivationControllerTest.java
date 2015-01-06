@@ -50,16 +50,16 @@ public class ActivationControllerTest {
 	// @formatter:off
 	@Test
 	public void activateUserTest() throws Exception {
-		when(activationServiceMock.activateUser(TestUtils.getActivationCode()))
-			.thenReturn(TestUtils.USER);
+		when(activationServiceMock.activateUser(TestUtils.USER_NAME,TestUtils.USER_ACTIVATION_CODE))
+			.thenReturn(TestUtils.getUserJTable());
 
-		mockMvc.perform(get("/activation").param("user.name", TestUtils.USER_NAME).param("code", TestUtils.CODE))
+		mockMvc.perform(get("/activation").param("name", TestUtils.USER_NAME).param("code", TestUtils.USER_ACTIVATION_CODE))
 			.andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
 				.andExpect((jsonPath("$.message", is("Account has been activated"))));
 		
-		verify(activationServiceMock, times(1)).activateUser(TestUtils.getActivationCode());
+		verify(activationServiceMock, times(1)).activateUser(TestUtils.USER_NAME,TestUtils.USER_ACTIVATION_CODE);
 	}
 	// @formatter:on
 }

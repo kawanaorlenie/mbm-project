@@ -10,12 +10,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.mbm.dao.ActivationCodeDao;
 import pl.mbm.dao.UserDao;
 import pl.mbm.exception.RegistrationFailedException;
 import pl.mbm.model.dto.UserJTable;
 import pl.mbm.model.dto.UserRegistrationForm;
-import pl.mbm.model.entity.ActivationCode;
 import pl.mbm.model.entity.User;
 import pl.mbm.service.MailService;
 import pl.mbm.service.UserService;
@@ -34,8 +32,6 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private MailService mailService;
 	@Autowired
-	private ActivationCodeDao activationCodeDao;
-	@Autowired
 	private UUIDGenerator uuidGenerator;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -47,18 +43,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public UserJTable registerUser(UserRegistrationForm userRegistrationForm) {
 		registrationValidator.validate(userRegistrationForm);
 		userRegistrationForm.setPassword(passwordEncoder
 				.encode(userRegistrationForm.getPassword()));
 		User user = conversionService.convert(userRegistrationForm, User.class);
-		ActivationCode savedActivationCode = saveUserAndActivationCode(user,
-				uuidGenerator.generate());
-		if (savedActivationCode == null)
+		String activationCode = uuidGenerator.generate();
+		user.setActivationCode(activationCode);
+		User savedUser = userDao.save(user);
+		if (savedUser == null)
 			throw new RegistrationFailedException();
-		mailService.sendActivationMail(savedActivationCode);
-		return conversionService.convert(savedActivationCode.getUser(),
-				UserJTable.class);
+
+		mailService.sendActivationMail(user, activationCode);
+		return conversionService.convert(savedUser, UserJTable.class);
 	}
 
 	@Override
@@ -75,14 +73,6 @@ public class UserServiceImpl implements UserService {
 				TypeDescriptor.forObject(users),
 				TypeDescriptor.collection(List.class,
 						TypeDescriptor.valueOf(UserJTable.class)));
-	}
-
-	@Transactional
-	private ActivationCode saveUserAndActivationCode(User user, String code) {
-		ActivationCode activationCode = new ActivationCode();
-		activationCode.setUser(user);
-		activationCode.setCode(code);
-		return activationCodeDao.save(activationCode);
 	}
 
 }

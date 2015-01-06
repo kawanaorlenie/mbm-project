@@ -16,7 +16,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pl.mbm.configuration.UserServiceTestContext;
-import pl.mbm.dao.ActivationCodeDao;
 import pl.mbm.dao.UserDao;
 import pl.mbm.dao.util.TestUtils;
 import pl.mbm.model.dto.UserJTable;
@@ -37,9 +36,6 @@ public class UserServiceTest {
 
 	@Autowired
 	private ConversionService conversionServiceMock;
-
-	@Autowired
-	private ActivationCodeDao activationCodeDaoMock;
 
 	@Autowired
 	private MailService mailServiceMock;
@@ -90,13 +86,14 @@ public class UserServiceTest {
 			.thenReturn(user);
 		Mockito.when(conversionServiceMock.convert(TestUtils.getUserWithId(), UserJTable.class))
 			.thenReturn(TestUtils.getUserJTable());
-		Mockito.when(activationCodeDaoMock.save(TestUtils.getActivationCode()))
-			.thenReturn(TestUtils.getActivationCodeWithId());
 		Mockito.doNothing().when(mailServiceMock)
-			.sendActivationMail(TestUtils.getActivationCode());
+			.sendActivationMail(TestUtils.USER,TestUtils.USER_ACTIVATION_CODE);
 		Mockito.when(uuidGeneratorMock.generate())
-			.thenReturn(TestUtils.CODE);
-		Mockito.when(passwordEncoderMock.encode(TestUtils.USER_PASSWORD)).thenReturn(TestUtils.USER_ENCODED_PASSWORD);
+			.thenReturn(TestUtils.USER_ACTIVATION_CODE);
+		Mockito.when(passwordEncoderMock.encode(TestUtils.USER_PASSWORD))
+			.thenReturn(TestUtils.USER_ENCODED_PASSWORD);
+		Mockito.when(userDaoMock.save(TestUtils.USER))
+			.thenReturn(TestUtils.getUserWithId());
 
 		UserJTable userJTable = userService.registerUser(userRegistrationForm);
 		assertEquals(TestUtils.USER_NAME, userJTable.getName());
@@ -104,10 +101,10 @@ public class UserServiceTest {
 		verify(registrationValidatorMock, times(1)).validate(userRegistrationForm);
 		verify(conversionServiceMock, times(1)).convert(userRegistrationForm,User.class);
 		verify(conversionServiceMock, times(1)).convert(TestUtils.getUserWithId(), UserJTable.class);
-		verify(activationCodeDaoMock, times(1)).save(TestUtils.getActivationCode());
-		verify(mailServiceMock, times(1)).sendActivationMail(TestUtils.getActivationCode());
+		verify(mailServiceMock, times(1)).sendActivationMail(TestUtils.USER,TestUtils.USER_ACTIVATION_CODE);
 		verify(uuidGeneratorMock,times(1)).generate();
 		verify(passwordEncoderMock,times(1)).encode(TestUtils.USER_PASSWORD);
+		verify(userDaoMock,times(1)).save(TestUtils.USER);
 	}
 // @formatter:on
 	@Test

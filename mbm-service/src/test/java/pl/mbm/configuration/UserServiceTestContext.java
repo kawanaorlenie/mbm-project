@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import pl.mbm.dao.ActivationCodeDao;
 import pl.mbm.dao.UserDao;
 import pl.mbm.model.dto.UserRegistrationForm;
 import pl.mbm.service.MailService;
@@ -40,11 +39,6 @@ public class UserServiceTestContext {
 	@Bean
 	public MailService mailServiceMock() {
 		return Mockito.mock(MailService.class);
-	}
-
-	@Bean
-	public ActivationCodeDao activationCodeDaoMock() {
-		return Mockito.mock(ActivationCodeDao.class);
 	}
 
 	@Bean
