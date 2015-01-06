@@ -19,6 +19,7 @@ import pl.mbm.model.entity.ActivationCode;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DatabaseTearDown;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { PersistenceContextTest.class })
@@ -26,7 +27,8 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 		DirtiesContextTestExecutionListener.class,
 		TransactionalTestExecutionListener.class,
 		DbUnitTestExecutionListener.class })
-@DatabaseSetup("UserData.xml")
+@DatabaseSetup("ActivationData.xml")
+@DatabaseTearDown(value = { "ActivationData.xml" })
 public class ActivationCodeDaoTest {
 
 	@Autowired
@@ -45,4 +47,12 @@ public class ActivationCodeDaoTest {
 		assertEquals(TestUtils.USER_NAME, activationCode.getUser().getName());
 	}
 
+	@Test
+	public void findByCode() {
+		// activationCodeDao.save(TestUtils.getActivationCode());
+		ActivationCode activationCode = activationCodeDao
+				.findByCode(TestUtils.CODE);
+		assertNotNull(activationCode);
+		assertNotNull(activationCode.getUser());
+	}
 }

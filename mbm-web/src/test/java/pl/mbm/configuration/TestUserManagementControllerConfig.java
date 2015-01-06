@@ -5,8 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import pl.mbm.controller.UserManagementController;
 import pl.mbm.service.UserService;
-import pl.mbm.validator.RegistrationValidator;
+import pl.mbm.service.validator.RegistrationValidator;
 
 @Configuration
 public class TestUserManagementControllerConfig {
@@ -24,6 +25,11 @@ public class TestUserManagementControllerConfig {
 	@Bean
 	public RegistrationValidator registrationValidatorMock() {
 		return Mockito.mock(RegistrationValidator.class);
+	}
+
+	@Bean
+	public UserManagementController userManagementController() {
+		return new UserManagementController();
 	}
 
 }

@@ -39,7 +39,7 @@ public class MailServiceImpl implements MailService {
 	}
 
 	private String createLink(ActivationCode savedActivationCode) {
-		return new StringBuffer("http://matrom.pl/activation?uuid=")
+		return new StringBuffer("http://matrom.pl/activation?code=")
 				.append(savedActivationCode.getCode()).append("&name=")
 				.append(savedActivationCode.getUser().getName()).toString();
 	}

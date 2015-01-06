@@ -1,6 +1,8 @@
-package pl.mbm.validator;
+package pl.mbm.service.validator;
 
-public interface RegistrationValidator {
+import pl.mbm.model.dto.UserRegistrationForm;
+
+public interface RegistrationValidator extends Validator<UserRegistrationForm> {
 
 	boolean emailFormatCorrect(String email);
 

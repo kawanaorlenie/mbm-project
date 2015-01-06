@@ -11,7 +11,7 @@ public class ActivationCode {
 
 	@Id
 	private String code;
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "activationCode")
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private User user;
 
 	public String getCode() {

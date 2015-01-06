@@ -23,7 +23,7 @@ import pl.mbm.model.dto.UserJTable;
 import pl.mbm.model.dto.UserRegistrationForm;
 import pl.mbm.model.entity.User;
 import pl.mbm.service.util.UUIDGenerator;
-import pl.mbm.validator.Validator;
+import pl.mbm.service.validator.Validator;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { UserServiceTestContext.class })
@@ -85,7 +85,7 @@ public class UserServiceTest {
 		User user = TestUtils.USER;
 
 		Mockito.when(registrationValidatorMock.validate(userRegistrationForm))
-			.thenReturn(true);
+			.thenReturn(userRegistrationForm);
 		Mockito.when(conversionServiceMock.convert(userRegistrationForm, User.class))
 			.thenReturn(user);
 		Mockito.when(conversionServiceMock.convert(TestUtils.getUserWithId(), UserJTable.class))

@@ -4,8 +4,9 @@ import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import pl.mbm.controller.RegistrationValidationController;
 import pl.mbm.service.UserService;
-import pl.mbm.validator.RegistrationValidator;
+import pl.mbm.service.validator.RegistrationValidator;
 
 @Configuration
 public class TestRegistrationValidationControllerConfig {
@@ -18,5 +19,10 @@ public class TestRegistrationValidationControllerConfig {
 	@Bean
 	public UserService userServiceMock() {
 		return Mockito.mock(UserService.class);
+	}
+
+	@Bean
+	public RegistrationValidationController registrationValidationController() {
+		return new RegistrationValidationController();
 	}
 }

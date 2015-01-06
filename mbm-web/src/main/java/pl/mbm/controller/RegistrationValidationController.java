@@ -12,7 +12,7 @@ import pl.mbm.model.dto.UserRegistrationForm;
 import pl.mbm.response.CorrectResponse;
 import pl.mbm.response.ErrorResponse;
 import pl.mbm.response.Response;
-import pl.mbm.validator.RegistrationValidator;
+import pl.mbm.service.validator.RegistrationValidator;
 
 @Controller
 @RequestMapping(URLs.VALIDATE_REGISTER_FORM)

@@ -10,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.nio.charset.Charset;
 import java.util.Arrays;
 
 import org.junit.Before;
@@ -30,6 +29,7 @@ import pl.mbm.configuration.TestUserManagementControllerConfig;
 import pl.mbm.configuration.WebAppContext;
 import pl.mbm.model.dto.UserJTable;
 import pl.mbm.service.UserService;
+import pl.mbm.util.TestUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { TestUserManagementControllerConfig.class,
@@ -71,14 +71,7 @@ public class UserManagementControllerTest {
 				get("/user/list").contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(
-						content()
-								.contentType(
-										new MediaType(
-												MediaType.APPLICATION_JSON
-														.getType(),
-												MediaType.APPLICATION_JSON
-														.getSubtype(), Charset
-														.forName("utf8"))))
+						content().contentType(TestUtil.APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$", hasSize(2)));
 
 		verify(userServiceMock, times(1)).listUsers();

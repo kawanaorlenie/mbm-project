@@ -1,4 +1,4 @@
-package pl.mbm.validator;
+package pl.mbm.service.validator.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +11,10 @@ import pl.mbm.exception.NameAlreadyExistsException;
 import pl.mbm.exception.NameIcorrectFormatException;
 import pl.mbm.exception.PasswordsMismatchException;
 import pl.mbm.model.dto.UserRegistrationForm;
+import pl.mbm.service.validator.RegistrationValidator;
 
 @Service
-public class RegistrationValidatorImpl implements
-		Validator<UserRegistrationForm>, RegistrationValidator {
+public class RegistrationValidatorImpl implements RegistrationValidator {
 
 	private static final String REGEX_NAME = "^[a-z]{1}[a-z0-9._]{4,18}[a-z0-9]{1}$";
 	private static final String REGEX_EMAIL = "^[a-z0-9._-]*@[a-z]*.[a-z]*";
@@ -24,7 +24,8 @@ public class RegistrationValidatorImpl implements
 	private UserDao userDao;
 
 	@Override
-	public boolean validate(UserRegistrationForm userRegistrationForm) {
+	public UserRegistrationForm validate(
+			UserRegistrationForm userRegistrationForm) {
 		if (passwordsMismatch(userRegistrationForm.getPassword(),
 				userRegistrationForm.getConfirmPassword()))
 			throw new PasswordsMismatchException();
@@ -36,7 +37,7 @@ public class RegistrationValidatorImpl implements
 			throw new NameAlreadyExistsException();
 		if (emailExists(userRegistrationForm.getEmail()))
 			throw new EmailAlreadyExistsException();
-		return false;
+		return userRegistrationForm;
 	}
 
 	public boolean emailFormatCorrect(String email) {

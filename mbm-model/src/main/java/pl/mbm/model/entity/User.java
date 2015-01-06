@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -40,9 +39,6 @@ public class User implements Serializable {
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Role> roles;
-
-	@OneToOne
-	private ActivationCode activationCode;
 
 	public User() {
 	}
@@ -136,7 +132,7 @@ public class User implements Serializable {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", password=" + password
 				+ ", email=" + email + ", enabled=" + enabled + ", roles="
-				+ roles + ", activationCode=" + activationCode + "]";
+				+ roles + "]";
 	}
 
 }

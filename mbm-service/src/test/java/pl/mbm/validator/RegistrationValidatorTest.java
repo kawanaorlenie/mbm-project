@@ -5,6 +5,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import pl.mbm.service.validator.RegistrationValidator;
+import pl.mbm.service.validator.impl.RegistrationValidatorImpl;
+
 public class RegistrationValidatorTest {
 
 	private RegistrationValidator validator = new RegistrationValidatorImpl();

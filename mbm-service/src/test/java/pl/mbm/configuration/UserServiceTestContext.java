@@ -13,7 +13,7 @@ import pl.mbm.service.MailService;
 import pl.mbm.service.UserService;
 import pl.mbm.service.impl.UserServiceImpl;
 import pl.mbm.service.util.UUIDGenerator;
-import pl.mbm.validator.Validator;
+import pl.mbm.service.validator.Validator;
 
 @Configuration
 public class UserServiceTestContext {
