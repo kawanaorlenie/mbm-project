@@ -42,12 +42,14 @@ public class MailServiceImpl implements MailService {
 
 	}
 
-	private String createLink(User user, String activationCode) {
+	public String createLink(User user, String activationCode) {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
 				.currentRequestAttributes()).getRequest();
-		System.out.println("CP: " + request.getContextPath());
-		return new StringBuffer(request.getContextPath())
-				.append("/activation?code=").append(activationCode)
-				.append("&name=").append(user.getName()).toString();
+		return new StringBuffer(request.getScheme()).append("://")
+				.append(request.getServerName()).append(":")
+				.append(request.getServerPort())
+				.append(request.getContextPath()).append("/activation?code=")
+				.append(activationCode).append("&name=").append(user.getName())
+				.toString();
 	}
 }

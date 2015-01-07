@@ -5,9 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,7 +41,7 @@ public class ConversionServiceTest {
 
 	@Test
 	public void convertSetTest() {
-		Set<User> usersMock = new HashSet<User>();
+		List<User> usersMock = new ArrayList<User>();
 		usersMock.add(new UserBuilder().name("one").role("ROLE_USER").build());
 		usersMock.add(new UserBuilder().name("two").build());
 

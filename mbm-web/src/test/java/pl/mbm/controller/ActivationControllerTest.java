@@ -6,9 +6,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +26,6 @@ import pl.mbm.configuration.ActivationControllerTestContext;
 import pl.mbm.configuration.WebAppContext;
 import pl.mbm.dao.util.TestUtils;
 import pl.mbm.service.ActivationService;
-import pl.mbm.util.TestUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { WebAppContext.class,
@@ -55,9 +54,10 @@ public class ActivationControllerTest {
 
 		mockMvc.perform(get("/activation").param("name", TestUtils.USER_NAME).param("code", TestUtils.USER_ACTIVATION_CODE))
 			.andDo(print())
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
-				.andExpect((jsonPath("$.message", is("Account has been activated"))));
+				.andExpect(status().isOk())				
+				.andExpect(view().name("login"))
+                .andExpect(model().attribute("activated", is(true)));
+				
 		
 		verify(activationServiceMock, times(1)).activateUser(TestUtils.USER_NAME,TestUtils.USER_ACTIVATION_CODE);
 	}

@@ -17,6 +17,11 @@
             You have been logged out.
         </p>
     </c:if>
+    <c:if test="${activated != null}">       
+        <p class="alert alert-info">
+            Your account has been activated. You can now log in.
+        </p>
+    </c:if>
 <form class="login_form" name='f' action="${loginUrl}" method='POST'>
    <FIELDSET>
       <LEGEND>Log In</LEGEND>
