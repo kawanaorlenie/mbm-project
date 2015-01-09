@@ -1,6 +1,6 @@
-package pl.mbm.builder;
+package pl.mbm.service.builder;
 
-import pl.mbm.model.dto.UserJTable;
+import pl.mbm.service.dto.UserJTable;
 
 public class UserJTableBuilder {
 

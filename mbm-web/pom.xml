@@ -17,6 +17,13 @@
 	<dependencies>
 		<dependency>
 			<groupId>pl.mbm</groupId>
+			<artifactId>mbm-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>pl.mbm</groupId>
 			<artifactId>mbm-dao</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>test-jar</type>

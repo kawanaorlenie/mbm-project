@@ -1,4 +1,4 @@
-package pl.mbm.model.dto;
+package pl.mbm.service.dto;
 
 public class UserJTable {
 

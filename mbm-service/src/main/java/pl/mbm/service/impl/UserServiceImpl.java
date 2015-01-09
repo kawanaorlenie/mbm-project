@@ -12,11 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pl.mbm.dao.UserDao;
 import pl.mbm.exception.RegistrationFailedException;
-import pl.mbm.model.dto.UserJTable;
-import pl.mbm.model.dto.UserRegistrationForm;
 import pl.mbm.model.entity.User;
 import pl.mbm.service.MailService;
 import pl.mbm.service.UserService;
+import pl.mbm.service.dto.UserJTable;
+import pl.mbm.service.dto.UserRegistrationForm;
 import pl.mbm.service.util.UUIDGenerator;
 import pl.mbm.service.validator.Validator;
 

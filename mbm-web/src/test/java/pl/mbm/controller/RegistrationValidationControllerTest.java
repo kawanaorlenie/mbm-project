@@ -27,7 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
 import pl.mbm.configuration.TestRegistrationValidationControllerConfig;
 import pl.mbm.configuration.WebAppContext;
 import pl.mbm.service.validator.RegistrationValidator;
-import pl.mbm.util.TestUtil;
+import pl.mbm.util.WebTestUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {
@@ -66,9 +66,9 @@ public class RegistrationValidationControllerTest {
 		mockMvc.perform(
 				post("/validate/registerForm/name")
 						.contentType(MediaType.APPLICATION_JSON)
-						.content(TestUtil.getUserRegistrationFormJsonBytes()))
+						.content(WebTestUtils.getUserRegistrationFormJsonBytes()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(WebTestUtils.APPLICATION_JSON_UTF8))
 				.andExpect((jsonPath("$.message", is("Name format is correct"))));
 
 		verify(registrtionValidatorMock, times(1)).nameFormatCorrect("user00");

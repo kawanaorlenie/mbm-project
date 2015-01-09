@@ -13,11 +13,11 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import pl.mbm.builder.UserRegistrationFormBuilder;
 import pl.mbm.configuration.ConverterTestContext;
 import pl.mbm.dao.RoleDao;
-import pl.mbm.model.dto.UserRegistrationForm;
 import pl.mbm.model.entity.User;
+import pl.mbm.service.builder.UserRegistrationFormBuilder;
+import pl.mbm.service.dto.UserRegistrationForm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ConverterTestContext.class })

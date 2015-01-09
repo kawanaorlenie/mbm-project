@@ -1,6 +1,6 @@
-package pl.mbm.builder;
+package pl.mbm.service.builder;
 
-import pl.mbm.model.dto.UserRegistrationForm;
+import pl.mbm.service.dto.UserRegistrationForm;
 
 public class UserRegistrationFormBuilder {
 

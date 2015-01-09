@@ -7,9 +7,9 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import pl.mbm.dao.UserDao;
-import pl.mbm.model.dto.UserRegistrationForm;
 import pl.mbm.service.MailService;
 import pl.mbm.service.UserService;
+import pl.mbm.service.dto.UserRegistrationForm;
 import pl.mbm.service.impl.UserServiceImpl;
 import pl.mbm.service.util.UUIDGenerator;
 import pl.mbm.service.validator.Validator;

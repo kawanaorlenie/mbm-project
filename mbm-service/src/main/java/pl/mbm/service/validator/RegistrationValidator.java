@@ -1,6 +1,6 @@
 package pl.mbm.service.validator;
 
-import pl.mbm.model.dto.UserRegistrationForm;
+import pl.mbm.service.dto.UserRegistrationForm;
 
 public interface RegistrationValidator extends Validator<UserRegistrationForm> {
 

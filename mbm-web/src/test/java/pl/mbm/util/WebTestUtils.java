@@ -5,13 +5,13 @@ import java.nio.charset.Charset;
 
 import org.springframework.http.MediaType;
 
-import pl.mbm.builder.UserRegistrationFormBuilder;
-import pl.mbm.model.dto.UserRegistrationForm;
+import pl.mbm.service.builder.UserRegistrationFormBuilder;
+import pl.mbm.service.dto.UserRegistrationForm;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class TestUtil {
+public class WebTestUtils {
 
 	public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(
 			MediaType.APPLICATION_JSON.getType(),
@@ -31,6 +31,6 @@ public class TestUtil {
 	}
 
 	public static byte[] getUserRegistrationFormJsonBytes() throws IOException {
-		return TestUtil.convertObjectToJsonBytes(getUserRegistrationForm());
+		return WebTestUtils.convertObjectToJsonBytes(getUserRegistrationForm());
 	}
 }

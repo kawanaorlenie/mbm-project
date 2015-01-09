@@ -27,9 +27,9 @@ import org.springframework.web.context.WebApplicationContext;
 
 import pl.mbm.configuration.TestUserManagementControllerConfig;
 import pl.mbm.configuration.WebAppContext;
-import pl.mbm.model.dto.UserJTable;
 import pl.mbm.service.UserService;
-import pl.mbm.util.TestUtil;
+import pl.mbm.service.dto.UserJTable;
+import pl.mbm.util.WebTestUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { TestUserManagementControllerConfig.class,
@@ -71,7 +71,7 @@ public class UserManagementControllerTest {
 				get("/user/list").contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(
-						content().contentType(TestUtil.APPLICATION_JSON_UTF8))
+						content().contentType(WebTestUtils.APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$", hasSize(2)));
 
 		verify(userServiceMock, times(1)).listUsers();

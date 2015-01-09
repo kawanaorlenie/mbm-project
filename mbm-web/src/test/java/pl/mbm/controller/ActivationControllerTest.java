@@ -24,8 +24,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import pl.mbm.configuration.ActivationControllerTestContext;
 import pl.mbm.configuration.WebAppContext;
-import pl.mbm.dao.util.TestUtils;
 import pl.mbm.service.ActivationService;
+import pl.mbm.service.util.ServiceTestUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { WebAppContext.class,
@@ -49,17 +49,17 @@ public class ActivationControllerTest {
 	// @formatter:off
 	@Test
 	public void activateUserTest() throws Exception {
-		when(activationServiceMock.activateUser(TestUtils.USER_NAME,TestUtils.USER_ACTIVATION_CODE))
-			.thenReturn(TestUtils.getUserJTable());
+		when(activationServiceMock.activateUser(ServiceTestUtils.USER_NAME,ServiceTestUtils.USER_ACTIVATION_CODE))
+			.thenReturn(ServiceTestUtils.getUserJTable());
 
-		mockMvc.perform(get("/activation").param("name", TestUtils.USER_NAME).param("code", TestUtils.USER_ACTIVATION_CODE))
+		mockMvc.perform(get("/activation").param("name", ServiceTestUtils.USER_NAME).param("code", ServiceTestUtils.USER_ACTIVATION_CODE))
 			.andDo(print())
 				.andExpect(status().isOk())				
 				.andExpect(view().name("login"))
                 .andExpect(model().attribute("activated", is(true)));
 				
 		
-		verify(activationServiceMock, times(1)).activateUser(TestUtils.USER_NAME,TestUtils.USER_ACTIVATION_CODE);
+		verify(activationServiceMock, times(1)).activateUser(ServiceTestUtils.USER_NAME,ServiceTestUtils.USER_ACTIVATION_CODE);
 	}
 	// @formatter:on
 }

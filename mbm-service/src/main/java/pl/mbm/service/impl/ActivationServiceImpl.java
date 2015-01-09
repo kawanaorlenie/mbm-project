@@ -7,9 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pl.mbm.dao.UserDao;
 import pl.mbm.exception.ActivationException;
-import pl.mbm.model.dto.UserJTable;
 import pl.mbm.model.entity.User;
 import pl.mbm.service.ActivationService;
+import pl.mbm.service.dto.UserJTable;
 
 @Service
 public class ActivationServiceImpl implements ActivationService {

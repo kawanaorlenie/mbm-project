@@ -1,6 +1,6 @@
 package pl.mbm.service;
 
-import pl.mbm.model.dto.UserJTable;
+import pl.mbm.service.dto.UserJTable;
 
 public interface ActivationService {
 

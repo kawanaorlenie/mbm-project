@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.mbm.exception.ValidationException;
-import pl.mbm.model.dto.UserJTable;
-import pl.mbm.model.dto.UserRegistrationForm;
 import pl.mbm.response.CorrectResponse;
 import pl.mbm.response.ErrorResponse;
 import pl.mbm.response.Response;
 import pl.mbm.service.UserService;
+import pl.mbm.service.dto.UserJTable;
+import pl.mbm.service.dto.UserRegistrationForm;
 
 @Controller
 public class RegistrationController {

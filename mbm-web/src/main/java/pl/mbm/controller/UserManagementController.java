@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import pl.mbm.model.dto.UserJTable;
 import pl.mbm.service.UserService;
+import pl.mbm.service.dto.UserJTable;
 
 @Controller
 @RequestMapping("/user")

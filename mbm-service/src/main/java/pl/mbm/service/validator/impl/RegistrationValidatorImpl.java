@@ -10,7 +10,7 @@ import pl.mbm.exception.EmailIncorrectFormatException;
 import pl.mbm.exception.NameAlreadyExistsException;
 import pl.mbm.exception.NameIcorrectFormatException;
 import pl.mbm.exception.PasswordsMismatchException;
-import pl.mbm.model.dto.UserRegistrationForm;
+import pl.mbm.service.dto.UserRegistrationForm;
 import pl.mbm.service.validator.RegistrationValidator;
 
 @Service

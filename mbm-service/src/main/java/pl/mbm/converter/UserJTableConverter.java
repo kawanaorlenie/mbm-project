@@ -2,11 +2,11 @@ package pl.mbm.converter;
 
 import org.springframework.core.convert.converter.Converter;
 
-import pl.mbm.builder.UserJTableBuilder;
 import pl.mbm.constant.Roles;
-import pl.mbm.model.dto.UserJTable;
 import pl.mbm.model.entity.Role;
 import pl.mbm.model.entity.User;
+import pl.mbm.service.builder.UserJTableBuilder;
+import pl.mbm.service.dto.UserJTable;
 
 public class UserJTableConverter implements Converter<User, UserJTable> {
 

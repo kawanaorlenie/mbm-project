@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.mbm.builder.UserBuilder;
 import pl.mbm.configuration.ConverterTestContext;
 import pl.mbm.constant.Roles;
-import pl.mbm.model.dto.UserJTable;
+import pl.mbm.service.dto.UserJTable;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ConverterTestContext.class })

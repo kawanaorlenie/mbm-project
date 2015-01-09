@@ -13,8 +13,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pl.mbm.configuration.ActivationServiceTestContext;
 import pl.mbm.dao.UserDao;
-import pl.mbm.dao.util.TestUtils;
-import pl.mbm.model.dto.UserJTable;
+import pl.mbm.dao.util.DaoTestUtils;
+import pl.mbm.service.dto.UserJTable;
+import pl.mbm.service.util.ServiceTestUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ActivationServiceTestContext.class })
@@ -35,17 +36,17 @@ public class ActivationServiceTest {
 
 	@Test
 	public void activateUserTest() {
-		Mockito.when(userDaoMock.findByName(TestUtils.USER_NAME)).thenReturn(
-				TestUtils.getUserWithId());
-		Mockito.when(userDaoMock.save(TestUtils.getActivatedUserWithId()))
-				.thenReturn(TestUtils.getUserWithId());
+		Mockito.when(userDaoMock.findByName(DaoTestUtils.USER_NAME)).thenReturn(
+				DaoTestUtils.getUserWithId());
+		Mockito.when(userDaoMock.save(DaoTestUtils.getActivatedUserWithId()))
+				.thenReturn(DaoTestUtils.getUserWithId());
 		Mockito.when(
-				conversionServiceMock.convert(TestUtils.getUserWithId(),
-						UserJTable.class))
-				.thenReturn(TestUtils.getUserJTable());
+				conversionServiceMock.convert(DaoTestUtils.getUserWithId(),
+						UserJTable.class)).thenReturn(
+				ServiceTestUtils.getUserJTable());
 
-		UserJTable user = activationService.activateUser(TestUtils.USER_NAME,
-				TestUtils.USER_ACTIVATION_CODE);
-		assertEquals(TestUtils.USER_NAME, user.getName());
+		UserJTable user = activationService.activateUser(DaoTestUtils.USER_NAME,
+				DaoTestUtils.USER_ACTIVATION_CODE);
+		assertEquals(DaoTestUtils.USER_NAME, user.getName());
 	}
 }

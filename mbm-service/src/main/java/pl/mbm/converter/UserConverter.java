@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 import pl.mbm.builder.UserBuilder;
 import pl.mbm.dao.RoleDao;
-import pl.mbm.model.dto.UserRegistrationForm;
 import pl.mbm.model.entity.Role;
 import pl.mbm.model.entity.User;
+import pl.mbm.service.dto.UserRegistrationForm;
 
 @Service
 public class UserConverter implements Converter<UserRegistrationForm, User> {

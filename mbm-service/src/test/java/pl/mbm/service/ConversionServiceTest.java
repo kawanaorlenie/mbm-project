@@ -18,9 +18,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pl.mbm.builder.UserBuilder;
 import pl.mbm.configuration.ConverterTestContext;
-import pl.mbm.model.dto.UserJTable;
-import pl.mbm.model.dto.UserRegistrationForm;
 import pl.mbm.model.entity.User;
+import pl.mbm.service.dto.UserJTable;
+import pl.mbm.service.dto.UserRegistrationForm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ConverterTestContext.class, })

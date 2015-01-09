@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import pl.mbm.model.dto.UserJTable;
 import pl.mbm.service.ActivationService;
+import pl.mbm.service.dto.UserJTable;
 
 @Controller
 public class ActivationController {
