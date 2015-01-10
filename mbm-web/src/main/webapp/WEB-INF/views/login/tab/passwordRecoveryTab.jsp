@@ -4,13 +4,14 @@
 <p>Just enter the same e-mail address you used in registration
 	process, click 'send' and follow step-by-step instructions to regain
 	account access.</p>
-<form:form class="rec_form" method="Post" action="forgot"
-	commandName="forgotPassword">
+<form id="passwordRecoveryForm" class="rec_form" method="Post" action="/forgot" >
 	<fieldset>
 		<LEGEND>Password Recovery</LEGEND>
-		<form:errors path="email" class="alert alert-danger" />
 		<label for="email">E-mail adress</label>
-		<form:input class="recovery" placeholder="E-mail adress" path="email" />
+		<input class="recovery" placeholder="E-mail adress" id="email" name="email"/>
+		     <input type="hidden"                        
+        name="${_csrf.parameterName}"
+        value="${_csrf.token}"/>
 		<button name="submit" type="submit">Send</button>
 	</fieldset>
-</form:form>
+</form>

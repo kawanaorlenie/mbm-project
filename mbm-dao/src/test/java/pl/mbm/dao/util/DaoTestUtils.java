@@ -3,6 +3,7 @@ package pl.mbm.dao.util;
 import java.util.UUID;
 
 import pl.mbm.builder.UserBuilder;
+import pl.mbm.model.entity.ResetPassword;
 import pl.mbm.model.entity.Role;
 import pl.mbm.model.entity.User;
 
@@ -36,5 +37,9 @@ public class DaoTestUtils {
 		return new UserBuilder().email(USER_EMAIL).name(USER_NAME)
 				.enabled(true).password(USER_PASSWORD).role(USER_ROLE_TEST)
 				.activationCode(USER_ACTIVATION_CODE).id(USER_ID).build();
+	}
+
+	public static ResetPassword getResetPassword() {
+		return new ResetPassword(USER_EMAIL, USER_ACTIVATION_CODE);
 	}
 }

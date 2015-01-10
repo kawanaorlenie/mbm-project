@@ -32,8 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers("/resources/**", "/register",
-						"/validate/registerForm/**", "/activation**")
-				.permitAll().antMatchers("/admin/**").hasRole("ADMIN")
+						"/validate/registerForm/**", "/activation**",
+						"/forgot**", "/resetPassword**").permitAll()
+				.antMatchers("/admin/**").hasRole("ADMIN")
 				.antMatchers("/login**").anonymous()
 				// all requests require authentication
 				.anyRequest().authenticated()

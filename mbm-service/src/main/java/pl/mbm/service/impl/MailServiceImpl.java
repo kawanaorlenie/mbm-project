@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import pl.mbm.model.entity.ResetPassword;
 import pl.mbm.model.entity.User;
 import pl.mbm.service.MailService;
 
@@ -43,13 +44,43 @@ public class MailServiceImpl implements MailService {
 	}
 
 	public String createLink(User user, String activationCode) {
+
+		return new StringBuffer(getFullContextPath())
+				.append("/activation?code=").append(activationCode)
+				.append("&name=").append(user.getName()).toString();
+	}
+
+	@Override
+	public void sendPasswordRecoveryMail(ResetPassword resetPassword) {
+		SimpleMailMessage msg = new SimpleMailMessage(
+				(SimpleMailMessage) this.templateMessage);
+		msg.setTo(resetPassword.getEmail());
+		String text = String
+				.format("To change your password click:  \n%s \n\nIgnore this mail, if you have not requested password recovery",
+						createLink(resetPassword));
+		msg.setText(text);
+		try {
+			this.mailSender.send(msg);
+		} catch (MailException ex) {
+			// simply log it and go on...
+			System.err.println(ex.getMessage());
+		}
+
+	}
+
+	private Object createLink(ResetPassword resetPassword) {
+		return new StringBuffer(getFullContextPath())
+				.append("/resetPassword?uuid=").append(resetPassword.getUuid())
+				.append("&email=").append(resetPassword.getEmail()).toString();
+	}
+
+	private String getFullContextPath() {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
 				.currentRequestAttributes()).getRequest();
 		return new StringBuffer(request.getScheme()).append("://")
 				.append(request.getServerName()).append(":")
 				.append(request.getServerPort())
-				.append(request.getContextPath()).append("/activation?code=")
-				.append(activationCode).append("&name=").append(user.getName())
-				.toString();
+				.append(request.getContextPath()).toString();
+
 	}
 }

@@ -13,7 +13,6 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 
 @Configuration
 @EnableWebMvc
-// @ComponentScan(basePackageClasses = { UserManagementController.class })
 public class WebAppContext extends WebMvcConfigurerAdapter {
 
 	@Override

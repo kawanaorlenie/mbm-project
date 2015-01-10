@@ -26,5 +26,4 @@ public class ServiceTestUtils extends DaoTestUtils {
 		return new UserBuilder().email("matrom.java@gmail.com")
 				.name("matrom_java").build();
 	}
-
 }
