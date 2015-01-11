@@ -5,10 +5,19 @@ import pl.mbm.dao.util.DaoTestUtils;
 import pl.mbm.model.entity.User;
 import pl.mbm.service.builder.UserJTableBuilder;
 import pl.mbm.service.builder.UserRegistrationFormBuilder;
+import pl.mbm.service.dto.PasswordRecoveryForm;
 import pl.mbm.service.dto.UserJTable;
 import pl.mbm.service.dto.UserRegistrationForm;
 
 public class ServiceTestUtils extends DaoTestUtils {
+
+	public static PasswordRecoveryForm getPasswordRecoveryForm() {
+		return new PasswordRecoveryForm(USER_EMAIL);
+	}
+
+	public static PasswordRecoveryForm getPasswordRecoveryFormWithEmptyMail() {
+		return new PasswordRecoveryForm("");
+	}
 
 	public static UserRegistrationForm getUserRegistrationForm() {
 		return new UserRegistrationFormBuilder().name(USER_NAME)

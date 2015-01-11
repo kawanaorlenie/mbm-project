@@ -21,6 +21,8 @@ public class WebTestUtils {
 			throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+		System.out.println(mapper.writeValueAsBytes(object));
+		System.out.println(mapper.writeValueAsString(object));
 		return mapper.writeValueAsBytes(object);
 	}
 

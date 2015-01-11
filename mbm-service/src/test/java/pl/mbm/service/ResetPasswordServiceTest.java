@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pl.mbm.configuration.ResetPasswordServiceTestContext;
 import pl.mbm.dao.ResetPasswordDao;
-import pl.mbm.dao.UserDao;
 import pl.mbm.dao.util.DaoTestUtils;
 import pl.mbm.service.util.ServiceTestUtils;
 import pl.mbm.service.util.UUIDGenerator;
@@ -25,8 +24,6 @@ public class ResetPasswordServiceTest {
 	@Autowired
 	private MailService mailServiceMock;
 	@Autowired
-	private UserDao userDaoMock;
-	@Autowired
 	private ResetPasswordDao resetPasswordDaoMock;
 
 	@Autowired
@@ -38,8 +35,6 @@ public class ResetPasswordServiceTest {
 				DaoTestUtils.USER_ACTIVATION_CODE);
 		Mockito.doNothing().when(mailServiceMock)
 				.sendPasswordRecoveryMail(ServiceTestUtils.getResetPassword());
-		Mockito.when(userDaoMock.findByEmail(ServiceTestUtils.USER_EMAIL))
-				.thenReturn(ServiceTestUtils.getUserWithId());
 		Mockito.when(
 				resetPasswordDaoMock.save(ServiceTestUtils.getResetPassword()))
 				.thenReturn(ServiceTestUtils.getResetPassword());

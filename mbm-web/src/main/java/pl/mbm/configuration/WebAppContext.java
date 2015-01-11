@@ -1,7 +1,11 @@
 package pl.mbm.configuration;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -19,6 +23,27 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
 	public void configureDefaultServletHandling(
 			DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
+	}
+
+	// @Override
+	// public void configureHandlerExceptionResolvers(
+	// List<HandlerExceptionResolver> exceptionResolvers) {
+	// exceptionResolvers.add(new ResponseStatusExceptionResolver());
+	// };
+
+	@Bean
+	public Validator validator() {
+		LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+		validator.setValidationMessageSource(messageSource());
+		return validator;
+	}
+	
+	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasename("i18n/messages");
+		messageSource.setUseCodeAsDefaultMessage(true);
+		return messageSource;
 	}
 
 	@Bean

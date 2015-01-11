@@ -7,6 +7,15 @@ public class PasswordRecoveryForm {
 	@ExistsInDatabase
 	private String email;
 
+	public PasswordRecoveryForm() {
+		super();
+	}
+
+	public PasswordRecoveryForm(String email) {
+		super();
+		this.email = email;
+	}
+
 	public String getEmail() {
 		return email;
 	}

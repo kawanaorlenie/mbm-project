@@ -1,11 +1,8 @@
 package pl.mbm.configuration;
 
-import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.support.ResourceBundleMessageSource;
 
 import pl.mbm.controller.UserManagementController;
 import pl.mbm.dao.configuration.PersistenceContext;
@@ -26,12 +23,6 @@ import pl.mbm.service.validator.RegistrationValidator;
 		PersistenceContext.class, WebAppContext.class, SecurityConfig.class })
 public class ApplicationContext {
 
-	@Bean
-	public MessageSource messageSource() {
-		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasename("i18n/messages");
-		messageSource.setUseCodeAsDefaultMessage(true);
-		return messageSource;
-	}
+
 
 }

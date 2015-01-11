@@ -3,6 +3,7 @@ package pl.mbm.configuration;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import pl.mbm.dao.ResetPasswordDao;
 import pl.mbm.dao.UserDao;
@@ -37,6 +38,10 @@ public class ResetPasswordServiceTestContext {
 	@Bean
 	public ResetPasswordService resetPasswordService() {
 		return new ResetPasswordServiceImpl();
+	}
+	
+	@Bean PasswordEncoder passwordEncoder(){
+		return Mockito.mock(PasswordEncoder.class);
 	}
 
 }

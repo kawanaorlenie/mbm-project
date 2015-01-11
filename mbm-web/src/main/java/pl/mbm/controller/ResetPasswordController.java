@@ -27,6 +27,8 @@ public class ResetPasswordController {
 	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
 	public Response sendMailWithCode(
 			@Valid @RequestBody PasswordRecoveryForm passwordRecoveryForm) {
+		System.out.println("AAAAAAAAAAAAAAAAAAAA: "
+				+ passwordRecoveryForm.getEmail());
 		resetPasswordService.beginProcedure(passwordRecoveryForm.getEmail());
 		return new CorrectResponse(200, null,
 				"Procedure has been initialized successfully");
