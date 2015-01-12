@@ -9,6 +9,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,19 +29,31 @@ public class RestErrorHandler {
 	@ResponseBody
 	public ValidationErrorDTO processValidationError(
 			MethodArgumentNotValidException ex) {
-		BindingResult result = ex.getBindingResult();
-		List<FieldError> fieldErrors = result.getFieldErrors();
-		return processFieldErrors(fieldErrors);
+		return processFieldErrors(ex.getBindingResult());
 	}
 
-	private ValidationErrorDTO processFieldErrors(List<FieldError> fieldErrors) {
+	private ValidationErrorDTO processFieldErrors(BindingResult result) {
 		ValidationErrorDTO dto = new ValidationErrorDTO();
 
+		List<FieldError> fieldErrors = result.getFieldErrors();
 		for (FieldError fieldError : fieldErrors) {
 			String localizedErrorMessage = resolveLocalizedErrorMessage(fieldError);
 			dto.addFieldError(fieldError.getField(), localizedErrorMessage);
 		}
+		
+		List<ObjectError> globalErrors = result.getGlobalErrors();
+		for (ObjectError objectError : globalErrors) {
+			String localizedErrorMessage = resolveLocalizedErrorMessage(objectError);
+			dto.addGlobalError(objectError.getObjectName(), localizedErrorMessage);
+		}
 		return dto;
+	}
+
+	private String resolveLocalizedErrorMessage(ObjectError objectError) {
+		Locale currentLocale = LocaleContextHolder.getLocale();
+		String localizedErrorMessage = messageSource.getMessage(objectError,
+				currentLocale);
+		return localizedErrorMessage;
 	}
 
 	private String resolveLocalizedErrorMessage(FieldError fieldError) {

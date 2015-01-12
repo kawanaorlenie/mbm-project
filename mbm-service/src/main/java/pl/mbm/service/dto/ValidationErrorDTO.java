@@ -6,6 +6,7 @@ import java.util.List;
 public class ValidationErrorDTO {
 
 	private List<FieldErrorDTO> fieldErrors = new ArrayList<>();
+	private List<FieldErrorDTO> globalErrors = new ArrayList<>();
 
 	public ValidationErrorDTO() {
 
@@ -15,6 +16,12 @@ public class ValidationErrorDTO {
 		FieldErrorDTO error = new FieldErrorDTO(path, message);
 		fieldErrors.add(error);
 	}
+	
+	public void addGlobalError(String path, String message) {
+		//TODO moznaby zrobic aby globalerror nie mial fielderrorow tylko samo message moze, albo cos
+		FieldErrorDTO error = new FieldErrorDTO(path, message);
+		globalErrors.add(error);
+	}
 
 	public List<FieldErrorDTO> getFieldErrors() {
 		return fieldErrors;
@@ -23,5 +30,14 @@ public class ValidationErrorDTO {
 	public void setFieldErrors(List<FieldErrorDTO> fieldErrors) {
 		this.fieldErrors = fieldErrors;
 	}
+
+	public List<FieldErrorDTO> getGlobalErrors() {
+		return globalErrors;
+	}
+
+	public void setGlobalErrors(List<FieldErrorDTO> globalErrors) {
+		this.globalErrors = globalErrors;
+	}
+	
 
 }

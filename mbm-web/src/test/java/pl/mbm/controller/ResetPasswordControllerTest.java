@@ -1,17 +1,21 @@
 package pl.mbm.controller;
 
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.io.IOException;
 
@@ -70,7 +74,7 @@ public class ResetPasswordControllerTest {
 			.andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(WebTestUtils.APPLICATION_JSON_UTF8))
-				.andExpect(jsonPath("$.message", is("Procedure has been initialized successfully")));
+				.andExpect(jsonPath("$.message", is("Email has been send to: "+DaoTestUtils.USER_EMAIL)));
 		
 		verify(resetPasswordServiceMock, times(1)).beginProcedure(DaoTestUtils.USER_EMAIL);
 		verify(userDaoMock,times(1)).findByEmail(DaoTestUtils.USER_EMAIL);
@@ -95,5 +99,51 @@ public class ResetPasswordControllerTest {
 		
 		verifyZeroInteractions(resetPasswordServiceMock);
 		verify(userDaoMock,times(1)).findByEmail("");
+	}
+	 
+	@Test
+	 public void showFormTest() throws Exception{
+		 mockMvc.perform(get("/resetPassword")
+				 .param("email", DaoTestUtils.USER_EMAIL)
+				 .param("uuid", DaoTestUtils.USER_ACTIVATION_CODE))
+		 	.andDo(print())
+		 		.andExpect(status().isOk())
+		 		.andExpect(view().name("resetPassword"))
+		 		.andExpect(model().attribute("passwords",hasProperty("email", is(DaoTestUtils.USER_EMAIL))))
+		 		.andExpect(model().attribute("passwords",hasProperty("uuid", is(DaoTestUtils.USER_ACTIVATION_CODE))));
+	 }
+	
+	@Test
+	public void resetPasswordTest() throws IOException, Exception{
+		when(resetPasswordServiceMock.changePassword(ServiceTestUtils.getPasswordsForm()))
+			.thenReturn(ServiceTestUtils.getUserWithId());
+		
+		mockMvc.perform(post("/resetPassword")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(WebTestUtils.convertObjectToJsonBytes(ServiceTestUtils.getPasswordsForm())))
+			.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(WebTestUtils.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$.message", is("Password has been changed successfully")));
+		
+		verify(resetPasswordServiceMock,times(1)).changePassword(ServiceTestUtils.getPasswordsForm());
+	}
+	
+	@Test
+	public void resetPasswordTest_passwordsMismatch_ValidationShouldFail() throws IOException, Exception{
+		when(resetPasswordServiceMock.changePassword(ServiceTestUtils.getPasswordsFormWithDifferentPasswords()))
+			.thenReturn(ServiceTestUtils.getUserWithId());
+		
+		mockMvc.perform(post("/resetPassword")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(WebTestUtils.convertObjectToJsonBytes(ServiceTestUtils.getPasswordsFormWithDifferentPasswords())))
+			.andDo(print())
+				.andExpect(status().isBadRequest())
+				.andExpect(content().contentType(WebTestUtils.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$.globalErrors", hasSize(1)))
+				.andExpect(jsonPath("$.globalErrors[*].field", contains("passwordsForm")))
+                .andExpect(jsonPath("$.globalErrors[*].message", contains("Passwords are not the same")));
+		
+		verifyZeroInteractions(resetPasswordServiceMock);
 	}
 }

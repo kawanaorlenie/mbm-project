@@ -27,27 +27,22 @@ public class ResetPasswordController {
 	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
 	public Response sendMailWithCode(
 			@Valid @RequestBody PasswordRecoveryForm passwordRecoveryForm) {
-		System.out.println("AAAAAAAAAAAAAAAAAAAA: "
-				+ passwordRecoveryForm.getEmail());
+		//TODO: ta funkcja nizej moglaby zwracac passwordRecoveryForm
 		resetPasswordService.beginProcedure(passwordRecoveryForm.getEmail());
 		return new CorrectResponse(200, null,
-				"Procedure has been initialized successfully");
+				"Email has been send to: "+passwordRecoveryForm.getEmail());
 	}
 
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.GET)
 	public ModelAndView showForm(@RequestParam String email,
 			@RequestParam String uuid) {
-		PasswordsForm passwordsForm = resetPasswordService
-				.generatePasswordsForm(email, uuid);
-		return new ModelAndView("resetPassword", "passwords", passwordsForm);
+		return new ModelAndView("resetPassword", "passwords", new PasswordsForm(email, uuid));
 	}
 
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
 	@ResponseBody
-	public Response resetPassword(@Valid PasswordsForm passwordsForm) {
+	public Response resetPassword(@Valid @RequestBody PasswordsForm passwordsForm) {
 		resetPasswordService.changePassword(passwordsForm);
-		// TODO dokoncz to
-		return new CorrectResponse(200, null,
-				"Password has been changed successfully");
+		return new CorrectResponse(200, null,"Password has been changed successfully");
 	}
 }

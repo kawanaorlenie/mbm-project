@@ -19,18 +19,16 @@ public class FieldMatchValidator implements
 	}
 
 	@Override
-	public boolean isValid(final Object value,
-			final ConstraintValidatorContext context) {
+	public boolean isValid(final Object value, final ConstraintValidatorContext context) {
 		try {
 			final Object firstObj = BeanUtils
 					.getProperty(value, firstFieldName);
 			final Object secondObj = BeanUtils.getProperty(value,
 					secondFieldName);
-
 			return firstObj == null && secondObj == null || firstObj != null
 					&& firstObj.equals(secondObj);
-		} catch (final Exception ignore) {
-			// ignore
+		} catch (final Exception e) {
+			e.printStackTrace();
 		}
 		return true;
 	}

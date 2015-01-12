@@ -8,7 +8,4 @@ public interface ResetPasswordService {
 	boolean beginProcedure(String email);
 
 	User changePassword(PasswordsForm passwordsForm);
-
-	PasswordsForm generatePasswordsForm(String email, String uuid);
-
 }

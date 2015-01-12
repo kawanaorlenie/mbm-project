@@ -6,6 +6,7 @@ import pl.mbm.model.entity.User;
 import pl.mbm.service.builder.UserJTableBuilder;
 import pl.mbm.service.builder.UserRegistrationFormBuilder;
 import pl.mbm.service.dto.PasswordRecoveryForm;
+import pl.mbm.service.dto.PasswordsForm;
 import pl.mbm.service.dto.UserJTable;
 import pl.mbm.service.dto.UserRegistrationForm;
 
@@ -34,5 +35,23 @@ public class ServiceTestUtils extends DaoTestUtils {
 	public static User getUserToSendMail() {
 		return new UserBuilder().email("matrom.java@gmail.com")
 				.name("matrom_java").build();
+	}
+
+	public static PasswordsForm getPasswordsForm() {
+		PasswordsForm passwordsForm = new PasswordsForm();
+		passwordsForm.setPassword(USER_PASSWORD);
+		passwordsForm.setConfirmPassword(USER_PASSWORD);
+		passwordsForm.setUuid(USER_ACTIVATION_CODE);
+		passwordsForm.setEmail(USER_EMAIL);
+		return passwordsForm;
+	}
+	
+	public static PasswordsForm getPasswordsFormWithDifferentPasswords() {
+		PasswordsForm passwordsForm = new PasswordsForm();
+		passwordsForm.setPassword(USER_PASSWORD);
+		passwordsForm.setConfirmPassword("somepassword");
+		passwordsForm.setUuid(USER_ACTIVATION_CODE);
+		passwordsForm.setEmail(USER_EMAIL);
+		return passwordsForm;
 	}
 }
