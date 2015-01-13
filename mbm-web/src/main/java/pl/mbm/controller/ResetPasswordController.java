@@ -30,13 +30,13 @@ public class ResetPasswordController {
 		//TODO: ta funkcja nizej moglaby zwracac passwordRecoveryForm
 		resetPasswordService.beginProcedure(passwordRecoveryForm.getEmail());
 		return new CorrectResponse(200, null,
-				"Email has been send to: "+passwordRecoveryForm.getEmail());
+				"Email has been sent to: "+passwordRecoveryForm.getEmail());
 	}
 
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.GET)
 	public ModelAndView showForm(@RequestParam String email,
 			@RequestParam String uuid) {
-		return new ModelAndView("resetPassword", "passwords", new PasswordsForm(email, uuid));
+		return new ModelAndView("resetPassword", "passwordsForm", new PasswordsForm(email, uuid));
 	}
 
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)

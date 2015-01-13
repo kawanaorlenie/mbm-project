@@ -68,8 +68,8 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/home").setViewName("categories");
-		registry.addViewController("/").setViewName("categories");
+		registry.addViewController("/home").setViewName("home");
+		registry.addViewController("/").setViewName("home");
 		registry.addViewController("/categories").setViewName("categories");
 		registry.addViewController("/login").setViewName("login");
 	}

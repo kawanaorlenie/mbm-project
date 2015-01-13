@@ -42,18 +42,11 @@ public class ResetPasswordServiceImpl implements ResetPasswordService {
 	@Override
 	@Transactional
 	public User changePassword(PasswordsForm passwordsForm) {
-		verifyUUID(passwordsForm);
+		ResetPassword resetPassword = resetPasswordDao.findByEmailAndUuid(passwordsForm.getEmail(), passwordsForm.getUuid());
+		if(resetPassword==null)
+			throw new ResetPasswordException();
 		User user = userDao.findByEmail(passwordsForm.getEmail());
 		user.setPassword(passwordEncoder.encode(passwordsForm.getPassword()));
 		return userDao.save(user);
-	}
-
-	private boolean verifyUUID(PasswordsForm passwordsForm) {
-		ResetPassword resetPassword = resetPasswordDao.findOne(passwordsForm
-				.getEmail());
-		if (resetPassword == null
-				|| !resetPassword.getUuid().equals(passwordsForm.getUuid()))
-			throw new ResetPasswordException();
-		return true;
 	}
 }

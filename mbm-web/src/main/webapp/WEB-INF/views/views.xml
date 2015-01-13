@@ -98,5 +98,12 @@
 		<put-attribute name="js" value="/WEB-INF/views/categories/select_categoriesJS.jsp" />
 		<put-attribute name="jsp" value="/WEB-INF/views/categories/select_categories.jsp" />
 	</definition>
+	
+		<definition name="home" extends="template">
+		<put-attribute name="title" value="Home" />
+		<put-attribute name="css" value="" />
+		<put-attribute name="js" value="" />
+		<put-attribute name="jsp" value="/WEB-INF/views/home/home.jsp" />
+	</definition>
 
 </tiles-definitions>

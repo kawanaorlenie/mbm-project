@@ -1,18 +1,26 @@
 package pl.mbm.service;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static pl.mbm.dao.util.DaoTestUtils.USER_ACTIVATION_CODE;
+import static pl.mbm.dao.util.DaoTestUtils.USER_EMAIL;
+import static pl.mbm.dao.util.DaoTestUtils.USER_PASSWORD;
+import static pl.mbm.dao.util.DaoTestUtils.getResetPassword;
+import static pl.mbm.dao.util.DaoTestUtils.getUserWithId;
+import static pl.mbm.service.util.ServiceTestUtils.getPasswordsForm;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pl.mbm.configuration.ResetPasswordServiceTestContext;
 import pl.mbm.dao.ResetPasswordDao;
-import pl.mbm.dao.util.DaoTestUtils;
-import pl.mbm.service.util.ServiceTestUtils;
+import pl.mbm.dao.UserDao;
+import pl.mbm.model.entity.User;
 import pl.mbm.service.util.UUIDGenerator;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,22 +33,44 @@ public class ResetPasswordServiceTest {
 	private MailService mailServiceMock;
 	@Autowired
 	private ResetPasswordDao resetPasswordDaoMock;
+	@Autowired
+	private UserDao userDaoMock;
+	@Autowired
+	private PasswordEncoder passwordEncoderMock;
 
 	@Autowired
 	private ResetPasswordService resetPasswordService;
 
 	@Test
 	public void beginProcedureTest() {
-		Mockito.when(generatorMock.generate()).thenReturn(
-				DaoTestUtils.USER_ACTIVATION_CODE);
-		Mockito.doNothing().when(mailServiceMock)
-				.sendPasswordRecoveryMail(ServiceTestUtils.getResetPassword());
-		Mockito.when(
-				resetPasswordDaoMock.save(ServiceTestUtils.getResetPassword()))
-				.thenReturn(ServiceTestUtils.getResetPassword());
+		Mockito.when(generatorMock.generate())
+			.thenReturn(USER_ACTIVATION_CODE);
+		Mockito.doNothing().when(mailServiceMock).sendPasswordRecoveryMail(getResetPassword());
+		Mockito.when(resetPasswordDaoMock.save(getResetPassword()))
+			.thenReturn(getResetPassword());
 
-		assertTrue(resetPasswordService
-				.beginProcedure(ServiceTestUtils.USER_EMAIL));
+		assertTrue(resetPasswordService.beginProcedure(USER_EMAIL));
 
+	}
+	
+	@Test
+	public void changePasswordTest(){
+		Mockito.when(resetPasswordDaoMock.findByEmailAndUuid(USER_EMAIL, USER_ACTIVATION_CODE))
+			.thenReturn(getResetPassword());
+		Mockito.when(userDaoMock.findByEmail(USER_EMAIL))
+			.thenReturn(getUserWithId());
+		Mockito.when(passwordEncoderMock.encode(USER_PASSWORD))
+			.thenReturn(USER_PASSWORD);
+		Mockito.when(userDaoMock.save(getUserWithId()))
+			.thenReturn(getUserWithId());
+		
+		User user = resetPasswordService.changePassword(getPasswordsForm());
+		
+		assertNotNull(user);
+		
+		Mockito.verify(resetPasswordDaoMock,Mockito.times(1)).findByEmailAndUuid(USER_EMAIL, USER_ACTIVATION_CODE);
+		Mockito.verify(userDaoMock,Mockito.times(1)).findByEmail(USER_EMAIL);
+		Mockito.verify(passwordEncoderMock,Mockito.times(1)).encode(USER_PASSWORD);
+		Mockito.verify(userDaoMock,Mockito.times(1)).save(getUserWithId());
 	}
 }

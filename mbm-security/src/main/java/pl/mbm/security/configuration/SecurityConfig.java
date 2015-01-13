@@ -31,11 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/resources/**", "/register",
-						"/validate/registerForm/**", "/activation**",
-						"/forgot**", "/resetPassword**").permitAll()
+				.antMatchers("/resources/**").permitAll()
+				.antMatchers("/login**","/register", "/validate/registerForm/**", "/activation**", "/forgot**", "/resetPassword**").anonymous()
 				.antMatchers("/admin/**").hasRole("ADMIN")
-				.antMatchers("/login**").anonymous()
 				// all requests require authentication
 				.anyRequest().authenticated()
 				// custom login page
@@ -43,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// logout after "logout" get request
 				.and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				// redirect to "/user/list" when unauthorized
+				// redirect to "/" when unauthorized
 				.and().exceptionHandling().accessDeniedPage("/");
 	}
 

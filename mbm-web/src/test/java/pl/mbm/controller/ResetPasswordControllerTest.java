@@ -56,7 +56,7 @@ public class ResetPasswordControllerTest {
 
 	@Before
 	public void setUp() {
-		Mockito.reset(resetPasswordServiceMock);
+		Mockito.reset(resetPasswordServiceMock,userDaoMock);
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
 				.build();
 	}
@@ -74,7 +74,7 @@ public class ResetPasswordControllerTest {
 			.andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(WebTestUtils.APPLICATION_JSON_UTF8))
-				.andExpect(jsonPath("$.message", is("Email has been send to: "+DaoTestUtils.USER_EMAIL)));
+				.andExpect(jsonPath("$.message", is("Email has been sent to: "+DaoTestUtils.USER_EMAIL)));
 		
 		verify(resetPasswordServiceMock, times(1)).beginProcedure(DaoTestUtils.USER_EMAIL);
 		verify(userDaoMock,times(1)).findByEmail(DaoTestUtils.USER_EMAIL);
@@ -109,8 +109,8 @@ public class ResetPasswordControllerTest {
 		 	.andDo(print())
 		 		.andExpect(status().isOk())
 		 		.andExpect(view().name("resetPassword"))
-		 		.andExpect(model().attribute("passwords",hasProperty("email", is(DaoTestUtils.USER_EMAIL))))
-		 		.andExpect(model().attribute("passwords",hasProperty("uuid", is(DaoTestUtils.USER_ACTIVATION_CODE))));
+		 		.andExpect(model().attribute("passwordsForm",hasProperty("email", is(DaoTestUtils.USER_EMAIL))))
+		 		.andExpect(model().attribute("passwordsForm",hasProperty("uuid", is(DaoTestUtils.USER_ACTIVATION_CODE))));
 	 }
 	
 	@Test

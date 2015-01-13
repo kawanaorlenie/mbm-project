@@ -18,6 +18,7 @@ import pl.mbm.dao.util.DaoTestUtils;
 import pl.mbm.model.entity.ResetPassword;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { PersistenceContextTest.class })
@@ -25,6 +26,7 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 		DirtiesContextTestExecutionListener.class,
 		TransactionalTestExecutionListener.class,
 		DbUnitTestExecutionListener.class })
+@DatabaseSetup("ResetPasswordData.xml")
 public class ResetPasswordDaoTest {
 
 	@Autowired
@@ -35,6 +37,12 @@ public class ResetPasswordDaoTest {
 	public void save_ShouldAddResetPassword() {
 		ResetPassword resetPassword = resetPasswordDao.save(DaoTestUtils
 				.getResetPassword());
+		assertNotNull("should return entity", resetPassword);
+	}
+	
+	@Test
+	public void findByEmailAndUuidTest(){
+		ResetPassword resetPassword = resetPasswordDao.findByEmailAndUuid("somemail@mbm.pl", "someuuid");
 		assertNotNull("should return entity", resetPassword);
 	}
 
