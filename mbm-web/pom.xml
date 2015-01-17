@@ -105,16 +105,30 @@
 			<version>${apache.tiles.version}</version>
 		</dependency>
 		<!-- potrzebne do validacji, nie podoba mi sie to -->
-		<dependency>
-			<groupId>javax.el</groupId>
-			<artifactId>javax.el-api</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-		<dependency>
+  <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.0</version>
+            <scope>test</scope>
+        </dependency>
+	<!-- 	<dependency>
 			<groupId>com.sun.el</groupId>
 			<artifactId>el-ri</artifactId>
 			<version>1.0</version>
-		</dependency>
+		</dependency> --> 
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-validator</artifactId>
+		<version>5.1.3.Final</version>
+		<!-- Servlet API 3.0 -->
+
+	</dependency>
+	<dependency>
+		<groupId>org.glassfish</groupId>
+		<artifactId>javax.servlet</artifactId>
+		<version>3.0</version>
+		<scope>provided</scope>
+	</dependency>
 
 
 

@@ -25,6 +25,13 @@ public class ServiceTestUtils extends DaoTestUtils {
 				.email(USER_EMAIL).password(USER_PASSWORD)
 				.confirmPassword(USER_PASSWORD).build();
 	}
+	
+	public static UserRegistrationForm getUserRegistrationFormWithWrongFields() {
+		return new UserRegistrationFormBuilder().name("a")
+				.email("a").password("a")
+				.confirmPassword("another").build();
+	}
+	
 
 	public static UserJTable getUserJTable() {
 		return new UserJTableBuilder().name(USER_NAME).email(USER_EMAIL)

@@ -1,5 +1,7 @@
 package pl.mbm.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,8 +28,7 @@ public class RegistrationController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
-	public Response register(
-			@RequestBody UserRegistrationForm userRegistrationForm) {
+	public Response register(@Valid	@RequestBody UserRegistrationForm userRegistrationForm) {
 		UserJTable user = userService.registerUser(userRegistrationForm);
 		return new CorrectResponse(200, user, USER_CREATED_MESSAGE);
 	}

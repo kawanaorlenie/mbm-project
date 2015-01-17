@@ -81,8 +81,6 @@ public class UserServiceTest {
 		UserRegistrationForm userRegistrationForm = ServiceTestUtils.getUserRegistrationForm();
 		User user = DaoTestUtils.USER;
 
-		Mockito.when(registrationValidatorMock.validate(userRegistrationForm))
-			.thenReturn(userRegistrationForm);
 		Mockito.when(conversionServiceMock.convert(userRegistrationForm, User.class))
 			.thenReturn(user);
 		Mockito.when(conversionServiceMock.convert(DaoTestUtils.getUserWithId(), UserJTable.class))
@@ -99,7 +97,6 @@ public class UserServiceTest {
 		UserJTable userJTable = userService.registerUser(userRegistrationForm);
 		assertEquals(DaoTestUtils.USER_NAME, userJTable.getName());
 		
-		verify(registrationValidatorMock, times(1)).validate(userRegistrationForm);
 		verify(conversionServiceMock, times(1)).convert(userRegistrationForm,User.class);
 		verify(conversionServiceMock, times(1)).convert(DaoTestUtils.getUserWithId(), UserJTable.class);
 		verify(mailServiceMock, times(1)).sendActivationMail(DaoTestUtils.USER,DaoTestUtils.USER_ACTIVATION_CODE);

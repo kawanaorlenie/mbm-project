@@ -3,6 +3,9 @@ package pl.mbm.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static pl.mbm.dao.util.DaoTestUtils.USER_ACTIVATION_CODE;
+import static pl.mbm.dao.util.DaoTestUtils.USER_NAME;
+import static pl.mbm.dao.util.DaoTestUtils.getActivatedUserWithId;
 
 import java.util.Collection;
 import java.util.Set;
@@ -84,6 +87,13 @@ public class UserDaoTest {
 		Set<User> users = userDao.findAllWithRoles();
 		assertEquals(2, users.size());
 	}
+	
+	@Test
+	public void findByNameAndActivationCodeTest(){
+		userDao.save(getActivatedUserWithId());
+		User user = userDao.findByNameAndActivationCode(USER_NAME, USER_ACTIVATION_CODE);
+		assertNotNull(user);
+	}
 
 	private User createExpectedUser() {
 		return new UserBuilder().id(1L).name("matrom").email("matrom@mbm.pl")
@@ -102,5 +112,4 @@ public class UserDaoTest {
 		assertEquals("email should equals " + expectedUser.isEnabled(),
 				expectedUser.isEnabled(), user.isEnabled());
 	}
-
 }

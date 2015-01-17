@@ -22,13 +22,12 @@ public class ActivationServiceImpl implements ActivationService {
 	@Override
 	@Transactional
 	public UserJTable activateUser(String name, String activationCode) {
-		User user = userDao.findByName(name);
-		if (activationCode.equals(user.getActivationCode())) {
-			user.setEnabled(true);
-			UserJTable userJTable = conversionService.convert(
-					userDao.save(user), UserJTable.class);
-			return userJTable;
-		} else
+		User user = userDao.findByNameAndActivationCode(name, activationCode);
+		if (user == null)
 			throw new ActivationException();
+		user.setEnabled(true);
+		UserJTable userJTable = conversionService.convert(userDao.save(user),
+				UserJTable.class);
+		return userJTable;
 	}
 }

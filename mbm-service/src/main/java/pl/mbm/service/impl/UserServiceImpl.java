@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public UserJTable registerUser(UserRegistrationForm userRegistrationForm) {
-		registrationValidator.validate(userRegistrationForm);
+//		registrationValidator.validate(userRegistrationForm);
 		userRegistrationForm.setPassword(passwordEncoder
 				.encode(userRegistrationForm.getPassword()));
 		User user = conversionService.convert(userRegistrationForm, User.class);

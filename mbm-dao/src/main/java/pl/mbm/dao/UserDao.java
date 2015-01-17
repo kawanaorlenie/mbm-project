@@ -9,8 +9,10 @@ import pl.mbm.model.entity.User;
 public interface UserDao extends JpaRepository<User, Long>, UserDaoCustom,
 		QueryDslPredicateExecutor<User> {
 
-	public User findByName(String name);
+	User findByName(String name);
 
-	public User findByEmail(String email);
+	User findByEmail(String email);
+	
+	User findByNameAndActivationCode(String name, String activationCode);
 
 }
