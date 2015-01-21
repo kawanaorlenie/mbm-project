@@ -9,10 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.mbm.dao.UserDao;
 import pl.mbm.service.MailService;
 import pl.mbm.service.UserService;
-import pl.mbm.service.dto.UserRegistrationForm;
 import pl.mbm.service.impl.UserServiceImpl;
 import pl.mbm.service.util.UUIDGenerator;
-import pl.mbm.service.validator.Validator;
 
 @Configuration
 public class UserServiceTestContext {
@@ -24,11 +22,6 @@ public class UserServiceTestContext {
 	@Bean
 	public UserDao userDaoMock() {
 		return Mockito.mock(UserDao.class);
-	}
-
-	@Bean
-	public Validator<UserRegistrationForm> registrationValidatorMock() {
-		return Mockito.mock(Validator.class);
 	}
 
 	@Bean

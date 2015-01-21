@@ -23,7 +23,6 @@ import pl.mbm.service.dto.UserJTable;
 import pl.mbm.service.dto.UserRegistrationForm;
 import pl.mbm.service.util.ServiceTestUtils;
 import pl.mbm.service.util.UUIDGenerator;
-import pl.mbm.service.validator.Validator;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { UserServiceTestContext.class })
@@ -31,9 +30,6 @@ public class UserServiceTest {
 
 	@Autowired
 	private UserDao userDaoMock;
-
-	@Autowired
-	private Validator<UserRegistrationForm> registrationValidatorMock;
 
 	@Autowired
 	private ConversionService conversionServiceMock;
@@ -52,7 +48,7 @@ public class UserServiceTest {
 
 	@Before
 	public void setUp() {
-		Mockito.reset(userDaoMock, registrationValidatorMock,
+		Mockito.reset(userDaoMock, 
 				conversionServiceMock);
 	}
 

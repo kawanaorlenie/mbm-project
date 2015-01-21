@@ -11,14 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.mbm.dao.UserDao;
-import pl.mbm.exception.RegistrationFailedException;
 import pl.mbm.model.entity.User;
 import pl.mbm.service.MailService;
 import pl.mbm.service.UserService;
 import pl.mbm.service.dto.UserJTable;
 import pl.mbm.service.dto.UserRegistrationForm;
 import pl.mbm.service.util.UUIDGenerator;
-import pl.mbm.service.validator.Validator;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,8 +25,6 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 	@Autowired
 	private ConversionService conversionService;
-	@Autowired
-	private Validator<UserRegistrationForm> registrationValidator;
 	@Autowired
 	private MailService mailService;
 	@Autowired
@@ -45,16 +41,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public UserJTable registerUser(UserRegistrationForm userRegistrationForm) {
-//		registrationValidator.validate(userRegistrationForm);
 		userRegistrationForm.setPassword(passwordEncoder
 				.encode(userRegistrationForm.getPassword()));
 		User user = conversionService.convert(userRegistrationForm, User.class);
 		String activationCode = uuidGenerator.generate();
 		user.setActivationCode(activationCode);
 		User savedUser = userDao.save(user);
-		if (savedUser == null)
-			throw new RegistrationFailedException();
-
 		mailService.sendActivationMail(user, activationCode);
 		return conversionService.convert(savedUser, UserJTable.class);
 	}

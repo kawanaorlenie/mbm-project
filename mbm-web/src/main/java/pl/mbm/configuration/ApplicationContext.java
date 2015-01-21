@@ -13,16 +13,13 @@ import pl.mbm.service.configuration.ConversionServiceFactoryBeanContext;
 import pl.mbm.service.configuration.MailBeans;
 import pl.mbm.service.impl.UserServiceImpl;
 import pl.mbm.service.util.UUIDGenerator;
-import pl.mbm.service.validator.RegistrationValidator;
 
 @Configuration
 @ComponentScan(basePackageClasses = { UserServiceImpl.class, UserService.class,
-		RegistrationValidator.class, DatabaseFillerOnStartup.class,
-		UUIDGenerator.class, UserManagementController.class })
+		DatabaseFillerOnStartup.class, UUIDGenerator.class,
+		UserManagementController.class })
 @Import({ ConversionServiceFactoryBeanContext.class, MailBeans.class,
 		PersistenceContext.class, WebAppContext.class, SecurityConfig.class })
 public class ApplicationContext {
-
-
 
 }
