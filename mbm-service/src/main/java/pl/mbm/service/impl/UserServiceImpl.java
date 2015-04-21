@@ -54,14 +54,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public List<UserJTable> listUsers() {
-		Set<User> users = userDao.findAllWithRoles();
+		Set<User> users = userDao.findAll();
 		List<UserJTable> usersJTable = convertUsers(users);
 		return usersJTable;
 	}
 
 	private List<UserJTable> convertUsers(Set<User> users) {
 		return (List<UserJTable>) conversionService.convert(
-				userDao.findAllWithRoles(),
+				userDao.findAll(),
 				TypeDescriptor.forObject(users),
 				TypeDescriptor.collection(List.class,
 						TypeDescriptor.valueOf(UserJTable.class)));

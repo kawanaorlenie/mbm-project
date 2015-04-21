@@ -1,18 +1,22 @@
 package pl.mbm.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.querydsl.QueryDslPredicateExecutor;
+import java.util.Set;
 
-import pl.mbm.dao.custom.UserDaoCustom;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
+import org.springframework.data.repository.CrudRepository;
+
 import pl.mbm.model.entity.User;
 
-public interface UserDao extends JpaRepository<User, Long>, UserDaoCustom,
-		QueryDslPredicateExecutor<User> {
+public interface UserDao extends CrudRepository<User, Long> {
 
 	User findByName(String name);
 
 	User findByEmail(String email);
-	
+
 	User findByNameAndActivationCode(String name, String activationCode);
 
+	@EntityGraph(value = "graph.User.roles", type = EntityGraphType.LOAD)
+	Set<User> findAll();
+	
 }

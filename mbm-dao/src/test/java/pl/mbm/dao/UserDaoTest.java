@@ -7,7 +7,6 @@ import static pl.mbm.dao.util.DaoTestUtils.USER_ACTIVATION_CODE;
 import static pl.mbm.dao.util.DaoTestUtils.USER_NAME;
 import static pl.mbm.dao.util.DaoTestUtils.getActivatedUserWithId;
 
-import java.util.Collection;
 import java.util.Set;
 
 import org.junit.Test;
@@ -67,13 +66,6 @@ public class UserDaoTest {
 
 	@Test
 	@Transactional
-	public void findAll_ShouldRetrunCollectionOfUsers() {
-		Collection<User> users = userDao.findAll();
-		assertEquals("should have two users", 2, users.size());
-	}
-
-	@Test
-	@Transactional
 	public void save_ShouldAddUser() {
 		User userToSave = new UserBuilder().name("user00")
 				.email("user00@mbm.pl").password("asdf").enabled(true)
@@ -84,7 +76,7 @@ public class UserDaoTest {
 
 	@Test
 	public void findAllWithRolesTest() {
-		Set<User> users = userDao.findAllWithRoles();
+		Set<User> users = userDao.findAll();
 		assertEquals(2, users.size());
 	}
 	
