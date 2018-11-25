@@ -7,10 +7,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.mbm.builder.UserBuilder;
+import pl.mbm.entity.UserBuilder;
 import pl.mbm.constant.Roles;
 import pl.mbm.dao.UserDao;
-import pl.mbm.model.entity.User;
+import pl.mbm.entity.User;
 
 @Component
 public class DatabaseFillerOnStartup implements
