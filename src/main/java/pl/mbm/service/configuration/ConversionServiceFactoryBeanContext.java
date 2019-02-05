@@ -19,7 +19,7 @@ public class ConversionServiceFactoryBeanContext {
 	@Autowired
 	private UserConverter userConverter;
 
-	@Bean
+//	@Bean
 	public ConversionServiceFactoryBean conversionService() {
 		ConversionServiceFactoryBean conversionServiceFactoryBean = new ConversionServiceFactoryBean();
 		Set<Converter> converters = new HashSet<Converter>();

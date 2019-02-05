@@ -15,7 +15,7 @@ public class ActivationServiceImpl implements ActivationService {
 
 	@Autowired
 	private UserDao userDao;
-	@Autowired
+//	@Autowired
 	private ConversionService conversionService;
 
 	@Override

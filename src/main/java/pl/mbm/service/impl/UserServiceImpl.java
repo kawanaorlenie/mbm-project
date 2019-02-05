@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
-	@Autowired
+//	@Autowired
 	private ConversionService conversionService;
 	@Autowired
 	private MailService mailService;
